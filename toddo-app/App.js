@@ -62,6 +62,7 @@ export default function App() {
         <Button
           title="Add a new task"
           onPress={modalVisibleHandler}
+          color={'#FFBD59'}
         />
       </View>
 
@@ -116,12 +117,21 @@ export default function App() {
           // numColumns={2}
           // columnWrapperStyle={{paddingBottom: 100}}
           // ItemSeparatorComponent={<Text>SEPARATOR</Text>}
+          // styles.taskBackground
           data={tasks}
           renderItem={function (value) {
             return (
               <Pressable
-                onPress={() => deleteTaskHandler(value.index)}
-                style={styles.taskBackground}>
+                onPress={() =>
+                  deleteTaskHandler(value.index)
+                }
+                android_ripple={{
+                  color: 'black',
+                }}
+                style={({ pressed }) => [
+                  { opacity: pressed ? 0.6 : 1 },
+                  styles.taskBackground,
+                ]}>
                 <Text style={styles.task}>
                   {value.item}
                 </Text>
@@ -152,7 +162,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     flex: 0.4,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     borderBottomWidth: 1,
     borderColor: '#fff',
@@ -167,10 +177,10 @@ const styles = StyleSheet.create({
     padding: 6,
     marginBottom: 10,
     elevation: 30,
-    shadowColor: 'red',
+    shadowColor: '#5F64AB',
     shadowOpacity: 1,
-    shadowOffset: 10,
-    shadowRadius: 8
+    shadowOffset: 5,
+    shadowRadius: 8,
   },
   task: {
     color: '#fff',
